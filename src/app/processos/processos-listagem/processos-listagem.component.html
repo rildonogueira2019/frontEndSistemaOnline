@@ -1,0 +1,71 @@
+<h1 class="mt-4">Processos</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Listagem de Id de Processos</li>
+</ol>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
+        {{ mensagemSucesso}}
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="mensagemErro">
+        {{ mensagemErro }}
+      </div>
+    </div>
+  </div>
+
+
+<div class="row">
+  <div class="col-md-2">
+    <button class="btn btn-warning" (click)="novoCadastro()">
+      <i class="fa fa-plus"></i> Novo
+    </button>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-condensed table-hover">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Id Processo</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let processo of processos">
+          <td>{{ processo.id }}</td>
+          <td>{{ processo.nome }}</td>
+          <td>
+            <button class="btn btn-primary"
+            routerLink="/processos/form/{{processo.id}}">
+              <i class="fa fa-edit"></i>
+            </button>
+            <button class="btn btn-danger" (click)="preparaDelecao(processo)" data-toggle="modal" data-target="#modalDelecao">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
+<div id="modalDelecao" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Confirma Deleção</h4>
+      </div>
+      <div class="modal-body" *ngIf="processoSelecionado">
+        Confirma a deleção do(a) Processo {{processoSelecionado.nome}} ?
+      </div>
+
+      <div class="modal-footer">
+          <button class="btn btn-success" (click)="deletarProcesso()" data-dismiss="modal">Confirma</button>
+        <button class="btn btn-info" data-dismiss="modal">Cancela</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
